@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finn schmückt den Weihnachtsbaum</title>
+
+<style>
+body{
+    margin:0;
+    padding:10px;
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+    color:white;
+    overflow-x:hidden;
+}
+
+h1{
+    text-align:center;
+}
+
+#header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:15px;
+    flex-wrap:wrap;
+}
+
+#header img{
+    width:90px;
+}
+
+#bubble{
+    background:white;
+    color:black;
+    padding:10px;
+    border-radius:12px;
+    width:100%;
+    max-width:420px;
+}
+.bubble-win{
+    animation:bubblePop 1s ease-out;
+    border:4px solid gold;
+}
+
+@keyframes bubblePop{
+
+    0%{
+        transform:scale(0.8);
+    }
+
+    60%{
+        transform:scale(1.1);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+#tree{
+    position:relative;
+    width:320px;
+    height:480px;
+    margin:auto;
+}
+
+.layer{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+}
+
+.l1{
+    top:40px;
+    border-left:90px solid transparent;
+    border-right:90px solid transparent;
+    border-bottom:120px solid #16a34a;
+}
+
+.l2{
+    top:120px;
+    border-left:120px solid transparent;
+    border-right:120px solid transparent;
+    border-bottom:150px solid #168740;
+}
+
+.l3{
+    top:220px;
+    border-left:150px solid transparent;
+    border-right:150px solid transparent;
+    border-bottom:180px solid #166534;
+}
+
+#stamm{
+    position:absolute;
+    bottom:0px;
+    left:135px;
+
+    width:52px;
+    height:80px;
+
+    background:
+        linear-gradient(
+            to right,
+            #643714,
+            #8b552a,
+            #643714
+        );
+
+    border-radius:4px;
+}
+
+.slot{
+    position:absolute;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:2px dashed #808080;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.slot.belegt{
+    border:none;
+}
+#p1{top:10px;left:130px;}
+#p2{top:95px;left:130px;}
+#p3{top:155px;left:70px;}
+#p4{top:155px;left:190px;}
+#p5{top:220px;left:130px;}
+#p6{top:260px;left:45px;}
+#p7{top:260px;left:215px;}
+#p8{top:370px;left:130px;}
+#p9{top:380px;left:25px;}
+#p10{top:380px;left:235px;}
+
+
+
+
+#tray{
+    margin:20px auto;
+    width:100%;
+    max-width:420px;
+    min-height:90px;
+    border:1px dashed #64748b;
+    border-radius:15px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    padding:10px;
+}
+.item{
+    position:relative;
+    width:56px;
+    height:56px;
+
+    border-radius:50%;
+    cursor:pointer;
+    touch-action:none;
+
+    box-shadow:
+        /* Schatten unten links */
+        inset 10px 10px 14px rgba(0,0,0,.45),
+
+        /* Aufhellung rechts oben */
+        inset -10px -10px 14px rgba(255,255,255,.35),
+
+        /* äußerer Schatten */
+        0 4px 8px rgba(0,0,0,.35);
+}
+/* Tooltip */
+.item:hover::before{
+    content: attr(data-piece);
+
+    position: relative;
+    top: -20px;
+    left: 50%;
+
+    transform: translateX(-0%);
+    padding:6px 12px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 999;
+}
+/* Glanzreflex rechts oben */
+.item::before{
+    content:"";
+    position:absolute;
+
+    top:14px;
+    right:14px;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.95),
+            rgba(255,255,255,.15)
+        );
+
+    transform:rotate(25deg);
+
+    filter:blur(.5px);
+}
+
+/* Metallkappe */
+.item::after{
+    content:"";
+
+    position:absolute;
+    top:-4px;
+    left:50%;
+
+    width:12px;
+    height:8px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            #f4f4f4,
+            #9ca3af
+        );
+
+    border-radius:3px 3px 0 0;
+}
+.red{
+    background:
+        radial-gradient(
+           circle at 72% 25%,
+            #ffffff 0%,
+            #fee2e2 15%,
+            #fca5a5 35%,
+            #dc2626 65%,
+            #7f1d1d 100%
+        );
+}
+.blue{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #dbeafe 15%,
+            #60a5fa 35%,
+            #1d4ed8 65%,
+            #0f172a 100%
+       );
+}
+.green{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #d1fae5 15%,
+            #6ee7b7 35%,
+            #22c55e 65%,
+            #14532d 100%
+        );
+}
+.yellow{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #fff8d6 15%,
+            #ffe082 35%,
+            #fbbf24 65%,
+            #b45309 100%
+        );
+}
+.purple{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #f3e8ff 15%,
+            #c084fc 35%,
+            #9333ea 65%,
+            #581c87 100%
+        );
+}
+.orange{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #ffe7c2 15%,
+            #ffb74d 35%,
+            #f97316 65%,
+            #9a3412 100%
+        );
+}
+.silver{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #f9fafb 10%,
+            #e5e7eb 25%,
+            #cbd5e1 45%,
+            #94a3b8 70%,
+            #475569 100%
+        );
+}
+.braun{
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            #ffffff 0%,
+            #e9d5c1 20%,
+            #b07a4f 45%,
+            #7c4a1e 70%,
+            #3e2210 100%
+        );
+}
+.grau{
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #f3f4f6 8%,
+            #9ca3af 25%,
+            #4b5563 50%,
+            #374151 75%,
+            #111827 100%
+       );
+}
+
+.star{
+    
+    width:68px;
+    height:68px;
+
+    clip-path:polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+
+    background:
+        radial-gradient(
+            circle at 72% 25%,
+            #ffffff 0%,
+            #fff8d6 8%,
+            #ffe082 25%,
+            #fbbf24 55%,
+            #d97706 80%,
+            #78350f 100%
+        );
+
+    /*transform:
+        perspective(800px)
+        rotateX(35deg)
+        rotateY(-20deg);*/
+
+    box-shadow:
+        inset -18px -18px 25px rgba(255,255,255,.8),
+        inset 18px 18px 25px rgba(0,0,0,.45);
+
+    filter:
+        drop-shadow(0 0 10px #fff7a0)
+        drop-shadow(0 0 25px #ffd700)
+        drop-shadow(0 0 50px #ffb700)
+        drop-shadow(12px 16px 15px rgba(0,0,0,.45));
+}
+
+
+.dragging{
+    transform:scale(1.2);
+    box-shadow:0 0 20px white;
+}
+
+button{
+    width:100%;
+    max-width:420px;
+    display:block;
+    margin:10px auto;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-size:18px;
+}
+
+#check{
+    background:#16a34a;
+}
+
+#restart{
+    background:#2563eb;
+}
+
+#result{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+
+.snowflake{
+    width:100%;
+	max-width:420px;
+    position:fixed;
+    top:-30px;
+    color:white;
+    pointer-events:none;
+    user-select:none;
+    z-index:9999;
+    animation:snowFall linear forwards;
+}
+
+@keyframes snowFall{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(110vh);
+    }
+}
+@keyframes glow{
+    0%{filter:drop-shadow(0 0 0 gold);}
+    50%{filter:drop-shadow(0 0 20px gold);}
+    100%{filter:drop-shadow(0 0 0 gold);}
+}
+@keyframes bounceWin{
+
+   0%{
+      transform:scale(1);
+   }
+
+   30%{
+      transform:scale(1.08);
+   }
+
+   60%{
+      transform:scale(0.96);
+   }
+
+   100%{
+      transform:scale(1);
+   }
+}
+
+.win{
+   animation:
+      glow 1s infinite,
+      bounceWin 1.2s infinite;
+}
+</style>
+</head>
+<body>
+<audio id="pling" src="pling.mp3"></audio>
+<audio id="wrong" src="wrong.mp3"></audio>
+<audio id="correct" src="correct.mp3"></audio>
+<!--h1>🎄 Finn schmückt den Weihnachtsbaum 🎄</h1-->
+
+<div id="header">
+    
+    <div id="bubble">
+	<table>
+	    <tr>
+		    <td>
+                <img id="bubbleimg" src="Wichtel_Finn_s.png" alt="Finn">
+			</td>
+			<td id="bubbletxt">
+				Hilf Finn den Baum zu schmücken!
+				Rot unterm Stern. Blau links von Gruen.
+				Gelb unter Rot.
+				Lila links von Orange.
+				Silber ganz unten.
+				Braune neben Silber.
+				zwischen Grün und Grau ist eine Kugel.
+			</td>
+		</tr>
+	</table>
+    </div>
+</div>
+
+<div id="tree">
+
+    <div class="layer l1"></div>
+    <div class="layer l2"></div>
+    <div id="stamm"></div>
+    <div class="layer l3"></div>
+
+    <div class="slot" id="p1"></div>
+    <div class="slot" id="p2"></div>
+    <div class="slot" id="p3"></div>
+    <div class="slot" id="p4"></div>
+    <div class="slot" id="p5"></div>
+    <div class="slot" id="p6"></div>
+    <div class="slot" id="p7"></div>
+    <div class="slot" id="p8"></div>
+    <div class="slot" id="p9"></div>
+    <div class="slot" id="p10"></div>
+
+</div>
+
+<div id="tray">
+
+    <div class="item star" data-piece="Stern"></div>
+    <div class="item green" data-piece="Gruen"></div>
+    <div class="item silver" data-piece="Silber"></div>
+    <div class="item blue" data-piece="Blau"></div>
+    <div class="item yellow" data-piece="Gelb"></div>
+    <div class="item purple" data-piece="Lila"></div>
+    <div class="item red" data-piece="Rot"></div>
+    <div class="item grau" data-piece="Grau"></div>
+    <div class="item orange" data-piece="Orange"></div>
+    <div class="item braun" data-piece="Braun"></div>
+
+</div>
+
+<button id="check"> Baum prüfen </button>
+
+<div id="result"></div>
+
+<script>
+
+const solution = {
+ p1:'Stern',
+ p2:'Rot',
+ p3:'Blau',
+ p4:'Gruen',
+ p5:'Gelb',
+ p6:'Lila',
+ p7:'Orange',
+ p8:'Silber',
+ p9:'Braun',
+ p10:'Grau'
+};
+
+let dragged = null;
+let origin = null;
+let offsetX = 0;
+let offsetY = 0;
+
+document.querySelectorAll('.item').forEach(enableDrag);
+
+function enableDrag(item){
+
+ item.addEventListener('pointerdown',e=>{
+
+   dragged=item;
+   origin=item.parentElement;
+
+   const r=item.getBoundingClientRect();
+
+   offsetX=e.clientX-r.left;
+   offsetY=e.clientY-r.top;
+
+   item.classList.add('dragging');
+
+   item.style.position='fixed';
+   item.style.left=r.left+'px';
+   item.style.top=r.top+'px';
+   item.style.zIndex='9999';
+
+   document.addEventListener(
+      'pointermove',
+      dragMove
+   );
+
+   document.addEventListener(
+      'pointerup',
+      dragEnd
+   );
+ });
+}
+
+function dragMove(e){
+
+ if(!dragged) return;
+
+ dragged.style.left =
+   (e.clientX-offsetX)+'px';
+
+ dragged.style.top =
+   (e.clientY-offsetY)+'px';
+   
+   
+   result.innerHTML="";
+}
+
+function dragEnd(e){
+
+ if(!dragged) return;
+
+ let target=null;
+
+ const zones=[
+  document.getElementById('tray'),
+  ...document.querySelectorAll('.slot')
+ ];
+
+ zones.forEach(z=>{
+
+   const r=z.getBoundingClientRect();
+
+   if(
+      e.clientX>=r.left &&
+      e.clientX<=r.right &&
+      e.clientY>=r.top &&
+      e.clientY<=r.bottom
+   ){
+      target=z;
+   }
+ });
+
+ if(target){
+   pling.play();
+
+   if(
+      target.classList.contains('slot')
+   ){
+
+      const existing=
+      target.querySelector('.item');
+
+      if(existing){
+
+         origin.appendChild(existing);
+         reset(existing);
+		 updateSlot(target);
+      }
+
+      target.appendChild(dragged);
+	  updateSlot(target);
+   }
+   else{
+
+      target.appendChild(dragged);
+   }
+ }
+ else{
+   origin.appendChild(dragged);
+ }
+
+ if(origin.classList.contains('slot')){
+   updateSlot(origin);
+
+ }
+ reset(dragged);
+
+ dragged=null;
+
+ document.removeEventListener(
+   'pointermove',
+   dragMove
+ );
+
+ document.removeEventListener(
+   'pointerup',
+   dragEnd
+
+ );
+
+ 
+}
+
+function reset(item){
+
+ item.classList.remove('dragging');
+
+ item.style.position='';
+ item.style.left='';
+ item.style.top='';
+ item.style.zIndex='';
+}
+function updateSlot(slot){
+    if(!slot || !slot.classList.contains('slot')) return;
+
+    if(slot.querySelector('.item')){
+        slot.classList.add('belegt');
+    }else{
+        slot.classList.remove('belegt');
+    }
+}
+document
+.getElementById('check')
+.addEventListener('click',()=>{
+
+ let ok=true;
+
+ Object.entries(solution)
+ .forEach(([slotId,value])=>{
+
+    const slot=
+    document.getElementById(slotId);
+
+    const item=
+    slot.querySelector('.item');
+
+    if(
+      !item ||
+      item.dataset.piece!==value
+    ){
+      ok=false;
+    }
+ });
+
+ const result=
+ document.getElementById('result');
+
+ if(ok){
+
+   // clearInterval(snowTimer);
+   
+   result.innerHTML=
+   '🏆 Geschafft! Finn freut sich!<br>🎄 Der Baum ist perfekt geschmückt!';
+
+   celebrateWin();
+
+   // Kugel-Ablage ausblenden
+   document.getElementById('tray').style.display='none';
+
+   // Prüfen-Button ausblenden
+   document.getElementById('check').style.display='none';
+
+   const bubbletxt =
+	   document.getElementById('bubbletxt');
+   bubbletxt.innerHTML =
+      '🎉 Großartig! Du hast alle Kugeln richtig aufgehängt!<br><br>' +
+      '⭐ Geheimcode: <b>1024</b><br><br>' +
+      'Finn ist begeistert von deinem Weihnachtsbaum!<br>' +
+	  'du darfst ihn jetzt besuchen<br>' +
+	  '🚀 <b>N 48° 00.630′ E 10° 08.415′</b>';
+   const bubbleimg =
+	   document.getElementById('bubbleimg');
+   bubbleimg.src = "Wichtel_Finn_X.png";
+
+   bubble.classList.add('bubble-win');
+
+   correct.play();
+   
+ }else{
+
+   result.innerHTML=
+   '❌ Noch nicht richtig.';
+
+   wrong.play();
+
+ }
+});
+
+function createSnowflake(){
+
+    const flake = document.createElement("div");
+
+    flake.className = "snowflake";
+    flake.innerHTML = "❄";
+
+    flake.style.left =
+        Math.random() * 100 + "vw";
+
+    flake.style.fontSize =
+        (10 + Math.random() * 20) + "px";
+
+    flake.style.animationDuration =
+        (4 + Math.random() * 8) + "s";
+
+    document.body.appendChild(flake);
+
+    setTimeout(() => {
+        flake.remove();
+    }, 12000);
+}
+
+function showConfetti(){
+
+    for(let i=0;i<120;i++){
+
+        const piece =
+            document.createElement("div");
+
+        piece.innerHTML =
+            Math.random() > 0.5 ? "🎉" : "⭐";
+
+        piece.style.position = "fixed";
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.top = "-30px";
+
+        piece.style.fontSize =
+            (12 + Math.random()*20) + "px";
+
+        piece.style.pointerEvents = "none";
+        piece.style.zIndex = "99999";
+
+        document.body.appendChild(piece);
+
+        piece.animate(
+        [
+            {
+                transform:
+                "translateY(0) rotate(0deg)"
+            },
+            {
+                transform:
+                "translateY(110vh) rotate(720deg)"
+            }
+        ],
+        {
+            duration:
+                2500 + Math.random()*2500,
+            easing:"linear"
+        });
+
+        setTimeout(()=>{
+            piece.remove();
+        },5000);
+    }
+}
+
+function celebrateWin(){
+
+    document
+      .getElementById('tree')
+      .classList.add('win');
+
+    showConfetti();
+}
+const snowTimer =
+    setInterval(createSnowflake, 250);
+	
+</script>
+
+</body>
+</html>
